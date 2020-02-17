@@ -1,9 +1,16 @@
 <template>
   <form @submit.prevent="saveNewEmployee()" method="post" class="form">
-    <input type="text" v-model="data.employee_name" placeholder="Name" required/>
-    <input type="text" v-model="data.employee_salary" placeholder="Salary" required/>
-    <input type="text" v-model="data.employee_age" placeholder="Age" required/>
-    <button type="submit">Submit</button>
+    <h2 class="form__title">Create New Employee:</h2>
+    <input class="form__input" type="text" v-model="data.employee_name" placeholder="Name" required />
+    <input
+      class="form__input"
+      type="text"
+      v-model="data.employee_salary"
+      placeholder="Salary"
+      required
+    />
+    <input class="form__input" type="text" v-model="data.employee_age" placeholder="Age" required />
+    <button class="form__btn" type="submit">Submit</button>
   </form>
 </template>
 
@@ -24,9 +31,9 @@ export default {
   methods: {
     saveNewEmployee() {
       store.dispatch("post", {
-          name: this.data.employee_name,
-          salary: this.data.employee_salary,
-          age: this.data.employee_age
+        name: this.data.employee_name,
+        salary: this.data.employee_salary,
+        age: this.data.employee_age
       });
       this.data = {};
     }
@@ -36,6 +43,7 @@ export default {
 
 <style>
 .form {
+  margin-top: 50px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -43,7 +51,7 @@ export default {
   align-items: flex-start;
 }
 
-.form input {
+.form__input {
   width: 100%;
   height: 50px;
   border-radius: 5px;
@@ -51,7 +59,11 @@ export default {
   padding: 10px;
 }
 
-.form button {
+.form__title {
+  margin-bottom: 30px;
+}
+
+.form__btn {
   border-radius: 5px;
   font-weight: bold;
   color: white;
@@ -62,7 +74,8 @@ export default {
   background-color: rgb(25, 109, 219);
 }
 
-.form button:focus {
+.form__btn:focus,
+.form__btn:hover {
   background-color: rgba(25, 109, 219, 0.5);
 }
 </style>

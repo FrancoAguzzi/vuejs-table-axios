@@ -23,7 +23,6 @@ export default new Vuex.Store({
     },
     setNewEmployeesData(state, payload) {
       state.allEmployees.push(payload);
-      console.log(state.allEmployees);
     }
   },
   actions: {
@@ -43,7 +42,6 @@ export default new Vuex.Store({
         .post("http://dummy.restapiexample.com/api/v1/create", payload)
         .then(response => {
           if (response.data.status === "success") {
-            console.log(response);
             context.commit("setNewEmployeesData", {
               id: response.data.data.id,
               employee_name: payload.name,
