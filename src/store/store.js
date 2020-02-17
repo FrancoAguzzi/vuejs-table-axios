@@ -7,10 +7,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // = data
-    allEmployees: [],
     apiError: false,
+    allEmployees: [],
     listViewFilters: {
-      inputSearch: ""
+      inputSearch: "",
+      firstRange: 0,
+      secondRange: 1000000
     }
   },
   mutations: {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     setNewEmployeesData(state, payload) {
       state.allEmployees.push(payload);
+    },
+    setFirstRangeValue(state, payload) {
+      state.listViewFilters.firstRange = payload;
+    },
+    setSecondRangeValue(state, payload) {
+      state.listViewFilters.secondRange = payload;
     }
   },
   actions: {

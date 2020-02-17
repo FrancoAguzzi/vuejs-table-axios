@@ -1,6 +1,7 @@
 <template>
   <div class="list-view-container">
     <InputSearch />
+    <RangeSliderComponent />
     <TableComponent />
     <FormComponent />
   </div>
@@ -10,6 +11,7 @@
 import FormComponent from "./FormComponent";
 import TableComponent from "./TableComponent";
 import InputSearch from "./InputSearch";
+import RangeSliderComponent from "./RangeSliderComponent";
 
 export default {
   name: "ListView",
@@ -19,7 +21,8 @@ export default {
   components: {
     FormComponent,
     TableComponent,
-    InputSearch
+    InputSearch,
+    RangeSliderComponent
   }
 };
 </script>

@@ -7,7 +7,7 @@
 
   <tbody v-else>
     <tr v-for="(employee, index) in allEmployees" :key="index">
-      <td  v-for="(prop, key) in employee" :key="key">{{ prop }}</td>
+      <td v-for="(prop, key) in employee" :key="key">{{ prop }}</td>
     </tr>
   </tbody>
 </template>
@@ -21,7 +21,7 @@ export default {
     return {};
   },
   mounted() {
-    store.dispatch('getInitialData');
+    store.dispatch("getInitialData");
   },
   computed: {
     allEmployees: function() {
@@ -34,8 +34,9 @@ export default {
       return this.allEmployees.filter(employee => {
         // declaring variable
         let foundSearch = false;
+        let foundRange = false;
 
-        // input text search
+        // input text search filter
         if (this.inputSearch === "") {
           // user didn't searched for any text
           foundSearch = true;
@@ -54,7 +55,15 @@ export default {
             }
           }
         }
-        return foundSearch;
+
+        // input range salary filter
+        foundRange =
+          parseInt(employee["employee_salary"]) <
+            store.state.listViewFilters.secondRange &&
+          parseInt(employee["employee_salary"]) >
+            store.state.listViewFilters.firstRange;
+
+        return foundSearch && foundRange;
       });
     }
   }
