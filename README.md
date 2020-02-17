@@ -1,4 +1,4 @@
-# VueJS Table with Search Filter:
+# VueJS Table with Search and Range Filters:
 
 Link for the API used in this project: http://dummy.restapiexample.com/
 
