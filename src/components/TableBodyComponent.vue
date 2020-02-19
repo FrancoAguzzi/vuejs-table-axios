@@ -1,6 +1,6 @@
 <template>
   <tbody v-if="typeof allEmployees !== 'undefined'">
-    <tr v-for="(employee, index) in filteredEmployees" :key="index">
+    <tr v-for="(employee, index) in filteredEmployees()" :key="index">
       <td v-for="(prop, key) in employee" :key="key">{{ prop }}</td>
     </tr>
   </tbody>
@@ -29,8 +29,27 @@ export default {
     },
     inputSearch: function() {
       return store.state.listViewFilters.inputSearch;
-    },
-    filteredEmployees: function() {
+    }
+  },
+  methods: {
+//     setTablePages(items, actualPage, limit){
+//     let toShow = [];
+//     let totalPage = Math.ceil( items.length / limit );
+//     let count = (actualPage * limit) - limit;
+//     let delimiter = count + limit;
+    
+//     if(actualPage <= totalPage){
+//         for(let i = count; i < delimiter; i++){
+//             if(items[i] != null){
+//                 toShow.push(items[i]);
+//             }
+//             count++;
+//         }
+//     }
+
+//     return toShow;
+// },
+    filteredEmployees() {
       return this.allEmployees.filter(employee => {
         // declaring variable
         let foundSearch = false;

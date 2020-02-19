@@ -1,6 +1,7 @@
 <template>
   <div class="range-slider__wrapper">
     <p class="range-slider__title">Employee Salary</p>
+
     <input
       v-model="firstRangeValue"
       type="range"
@@ -19,7 +20,11 @@
       class="range-slider"
       value="50000"
     />
-    <span class="range-slider__values">{{minValue}} to {{maxValue}}</span>
+
+    <span
+      :class="{ firstBiggerThanSecond: warning }"
+      class="range-slider__values"
+    >{{firstRangeValue}} to {{secondRangeValue}}</span>
   </div>
 </template>
 
@@ -31,36 +36,26 @@ export default {
   data() {
     return {
       firstRangeValue: 0,
-      secondRangeValue: 1000000
+      secondRangeValue: 1000000,
+      warning: false
     };
   },
-  computed: {
-    minValue: function() {
-      return this.firstRangeValue;
-    },
-    maxValue: function() {
-      return this.secondRangeValue;
-    }
-  },
   methods: {
-    setRangeOrder: function() {
+    commitChanges(callback, payload) {
       if (this.firstRangeValue > this.secondRangeValue) {
-        console.log('BEFORE = first: ' + this.firstRangeValue + ' | second: ' + this.secondRangeValue);
-        var temp = this.firstRangeValue;
-        this.firstRangeValue = this.secondRangeValue;
-        this.secondRangeValue = temp;
-        console.log('AFTER = first: ' + this.firstRangeValue + ' | second: ' + this.secondRangeValue);
+        this.warning = true;
+      } else {
+        this.warning = false;
       }
+      store.commit(callback, payload);
     }
   },
   watch: {
     firstRangeValue: function() {
-      this.setRangeOrder();
-      store.commit("setFirstRangeValue", this.minValue);
+      this.commitChanges("setFirstRangeValue", this.firstRangeValue);
     },
     secondRangeValue: function() {
-      this.setRangeOrder();
-      store.commit("setSecondRangeValue", this.maxValue);
+      this.commitChanges("setSecondRangeValue", this.secondRangeValue);
     }
   }
 };
@@ -74,7 +69,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 90px;
+  height: 100px;
   padding: 0;
   margin-bottom: 50px;
 }
@@ -85,6 +80,13 @@ export default {
   top: 40px;
 }
 
+.firstBiggerThanSecond {
+  background-color: rgb(255, 238, 0);
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 .range-slider {
   -webkit-appearance: none;
   width: 100%;
@@ -93,20 +95,20 @@ export default {
   outline: none;
 }
 .range-slider:focus::-webkit-slider-runnable-track {
-  background: #343A40;
+  background: #343a40;
 }
 .range-slider:focus::-ms-fill-lower {
-  background: #343A40;
+  background: #343a40;
 }
 .range-slider:focus::-ms-fill-upper {
-  background: #343A40;
+  background: #343a40;
 }
 .range-slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
   cursor: pointer;
   animate: 0.2s;
-  background: #343A40;
+  background: #343a40;
   border-radius: 1px;
   box-shadow: none;
   border: 0;
@@ -115,7 +117,7 @@ export default {
   z-index: 2;
   position: relative;
   box-shadow: 0px 0px 0px #000;
-  border: 1px solid #343A40;
+  border: 1px solid #343a40;
   height: 18px;
   width: 18px;
   border-radius: 25px;
@@ -129,7 +131,7 @@ export default {
   height: 5px;
   cursor: pointer;
   animate: 0.2s;
-  background: #343A40;
+  background: #343a40;
   border-radius: 1px;
   box-shadow: none;
   border: 0;
@@ -138,7 +140,7 @@ export default {
   z-index: 2;
   position: relative;
   box-shadow: 0px 0px 0px #000;
-  border: 1px solid #343A40;
+  border: 1px solid #343a40;
   height: 18px;
   width: 18px;
   border-radius: 25px;
@@ -156,7 +158,7 @@ export default {
 }
 .range-slider::-ms-fill-lower,
 .range-slider::-ms-fill-upper {
-  background: #343A40;
+  background: #343a40;
   border-radius: 1px;
   box-shadow: none;
   border: 0;
@@ -165,7 +167,7 @@ export default {
   z-index: 2;
   position: relative;
   box-shadow: 0px 0px 0px #000;
-  border: 1px solid #343A40;
+  border: 1px solid #343a40;
   height: 18px;
   width: 18px;
   border-radius: 25px;

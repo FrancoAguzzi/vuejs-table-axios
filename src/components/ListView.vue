@@ -16,7 +16,8 @@ import RangeSliderComponent from "./RangeSliderComponent";
 export default {
   name: "ListView",
   data() {
-    return {};
+    return {
+    };
   },
   components: {
     FormComponent,
