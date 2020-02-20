@@ -32,23 +32,6 @@ export default {
     }
   },
   methods: {
-//     setTablePages(items, actualPage, limit){
-//     let toShow = [];
-//     let totalPage = Math.ceil( items.length / limit );
-//     let count = (actualPage * limit) - limit;
-//     let delimiter = count + limit;
-    
-//     if(actualPage <= totalPage){
-//         for(let i = count; i < delimiter; i++){
-//             if(items[i] != null){
-//                 toShow.push(items[i]);
-//             }
-//             count++;
-//         }
-//     }
-
-//     return toShow;
-// },
     filteredEmployees() {
       return this.allEmployees.filter(employee => {
         // declaring variable
