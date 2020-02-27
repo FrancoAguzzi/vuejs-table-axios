@@ -43,7 +43,7 @@ export default {
 
 <style>
 .form {
-  margin-top: 50px;
+  margin: 50px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
